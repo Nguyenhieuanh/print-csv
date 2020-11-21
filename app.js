@@ -283,7 +283,7 @@ $(function () {
 });
 
 function getCountryCode(obj, val) {
-  return Object.keys(obj).find((key) => obj[key] === val);
+  return Object.keys(obj).find((key) => obj[key].toUpperCase() === val.toUpperCase());
 }
 
 $(document).on("click", "#export-csv", function () {
@@ -563,14 +563,15 @@ $(document).on("click", "#export-csv", function () {
     ];
     rows.push(row);
   }
-  let csvContent =
-    "data:text/csv;charset=utf-8," + rows.map((e) => e.join(",")).join("\n");
+  console.log(rows);
+//   let csvContent =
+//     "data:text/csv;charset=utf-8," + rows.map((e) => e.join(",")).join("\n");
 
-  var encodedUri = encodeURI(csvContent);
-  var link = document.createElement("a");
-  link.setAttribute("href", encodedUri);
-  link.setAttribute("download", "tablerates.csv");
-  document.body.appendChild(link);
+//   var encodedUri = encodeURI(csvContent);
+//   var link = document.createElement("a");
+//   link.setAttribute("href", encodedUri);
+//   link.setAttribute("download", "tablerates.csv");
+//   document.body.appendChild(link);
 
-  link.click();
+//   link.click();
 });
