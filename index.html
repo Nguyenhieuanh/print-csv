@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <link
+      href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+      integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./app.js"></script>
+    <style>
+      .custom-input {
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Table rates export</h1>
+      <div class="form-group">
+        <label for="rate-rule"></label>
+        <select class="custom-select" name="rate-rule" id="rate-rule">
+          <option value="1">Price v. destination</option>
+          <option value="2">Weight v. destination</option>
+        </select>
+        <br /><br /><br />
+        <table class="table table-striped table-inverse table-responsive">
+          <thead class="thead-inverse">
+            <tr>
+              <th>COUNTRY</th>
+              <th>REGION / STATE</th>
+              <th>ZIP / POSTAL CODE</th>
+              <th id="rule-col">ORDER SUBTOTAL (AND ABOVE)</th>
+              <th>SHIPPING PRICE</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbl-body">
+            <tr>
+              <th>
+                <input
+                  type="text"
+                  class="custom-input country-input"
+                />
+              </th>
+              <th>
+                <input
+                  type="text"
+                  class="custom-input region-input"
+                  value="*"
+                />
+              </th>
+              <th>
+                <input
+                  type="text"
+                  class="custom-input zip-input"
+                  value="*"
+                />
+              </th>
+              <th><input type="text" class="custom-input above-input" /></th>
+              <th><input type="text" class="custom-input price-input" /></th>
+              <th>
+                <button class="btn btn-danger btn-delete">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-success" id="add-row" style="margin-right: 5px;">Add row</button>
+        <button class="btn btn-primary" id="export-csv">Export</button>
+      </div>
+    </div>
+  </body>
+</html>
