@@ -22,7 +22,7 @@
     <script src="./app.js"></script>
     <style>
         .container {
-            max-width: 1300px !important;
+            max-width: 1350px !important;
         }
 
         .custom-input {
@@ -38,7 +38,7 @@
         #includedContent,
         .form-group>input,
         select {
-            margin-right: 25px;
+            margin-right: 20px;
         }
     </style>
 </head>
