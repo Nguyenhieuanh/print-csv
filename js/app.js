@@ -1,10 +1,6 @@
-// $(function () {
-//     $("#includedContent").load("country-select.html");
-// });
-
 $(document).ready(function () {
     $("#rate-rule").change(function (e) {
-        if ($("#rate-rule option:selected").val() == 1) {
+        if ($("#rate-rule option:selected").val() == 'Order Subtotal (and above)') {
             $("#rule-col").text("ORDER SUBTOTAL (AND ABOVE)");
             $('#and-above').text('Order Subtotal');
         } else {
@@ -320,7 +316,7 @@ $(document).on("click", "#export-csv", function () {
         $.ajax({
             async: false,
             global: false,
-            url: "/countryCode.json",
+            url: "/data/countryCode.json",
             dataType: "json",
             success: function (data) {
                 json = data;
@@ -371,6 +367,19 @@ $(document).on("click", "#export-csv", function () {
 
 $(document).on('click', '#import-csv', function (e) {
     var form_data = new FormData(document.getElementById("form-csv"));
+    var countryCodes = (function () {
+        var json = null;
+        $.ajax({
+            async: false,
+            global: false,
+            url: "/data/countryCode.json",
+            dataType: "json",
+            success: function (data) {
+                json = data;
+            },
+        });
+        return json;
+    })();
     $.ajax({
         type: "POST",
         url: "/controller/functions.php",
@@ -378,11 +387,33 @@ $(document).on('click', '#import-csv', function (e) {
         contentType: false,
         cache: false,
         processData: false,
-        dataType: "json",
         success: function (response) {
-            console.log('123');
-            console.log(response);
-        }, 
-        error: function(req, err){ console.log(err); }
+            var res = JSON.parse(response);
+            console.log(res.data);
+            if (res.data[0][3].toUpperCase() == 'ORDER SUBTOTAL (AND ABOVE)') {
+                $('#rate-rule').val('Order Subtotal (and above)');
+                $("#rule-col").text("ORDER SUBTOTAL (AND ABOVE)");
+                $('#and-above').text('Order Subtotal');
+            } else {
+                $('#rate-rule').val('Weight (and above)');
+                $("#rule-col").text("WEIGHT (AND ABOVE)");
+                $('#and-above').text('Weight');    
+            }
+            res.data.shift();
+            res.data.forEach(element => {
+                var key = element[0];
+                var row =
+                    "<tr>" +
+                    '<th><input type="text" class="custom-input country-input" value="' + countryCodes[key] + '"autocomplete="off"></th>' +
+                    '<th><input type="text" class="custom-input region-input" value="' + element[1] + '"></th>' +
+                    '<th><input type="text" class="custom-input zip-input" value="' + element[2] + '"></th>' +
+                    '<th><input type="text" class="custom-input above-input" value="' + element[3] + '"></th>' +
+                    '<th><input type="text" class="custom-input price-input" value="' + element[4] + '"></th>' +
+                    '<th><button class="btn btn-danger btn-delete btn-sm"><i class="far fa-trash-alt"></i></button></th>' +
+                    "</tr>";
+                $("#tbl-body").append(row);
+            });
+        },
+        error: function (req, err) { console.log(err); }
     });
 })

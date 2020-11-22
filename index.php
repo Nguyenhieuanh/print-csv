@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-    <script src="./app.js"></script>
+    <script src="./js/app.js"></script>
     <style>
         .container {
             max-width: 1350px !important;
@@ -69,7 +69,7 @@
             <button class="btn btn-primary btn-sm mr-3" id="export-csv">Export</button>
             <button class="btn btn-warning btn-sm mr-1" id="import-csv">Import</button>
             <form class="form-group" id="form-csv" method="POST" enctype="multipart/form-data">
-                <input type="file" name="file" class="form-control-file" id="file-csv">
+                <input type="file" name="file-csv" class="form-control-file" id="file-csv">
             </form>
         </div>
 
