@@ -2,8 +2,10 @@ $(document).ready(function () {
     $("#rate-rule").change(function (e) {
         if ($("#rate-rule option:selected").val() == 1) {
             $("#rule-col").text("ORDER SUBTOTAL (AND ABOVE)");
+            $('#and-above').text('Order Subtotal');
         } else {
             $("#rule-col").text("WEIGHT (AND ABOVE)");
+            $('#and-above').text('Weight');
         }
     });
 
@@ -19,6 +21,27 @@ $(document).ready(function () {
             "</tr>";
         $("#tbl-body").append(row);
     });
+
+    $('#add-country').on('click', function () {
+        var countrySelect = $('.selectpicker').val();
+        countrySelect.forEach(element => {
+            var row =
+                "<tr>" +
+                '<th><input type="text" class="custom-input country-input" value="' + element + '"autocomplete="off"></th>' +
+                '<th><input type="text" class="custom-input region-input" value="*"></th>' +
+                '<th><input type="text" class="custom-input zip-input" value="*"></th>' +
+                '<th><input type="text" class="custom-input above-input"></th>' +
+                '<th><input type="text" class="custom-input price-input"></th>' +
+                '<th><button class="btn btn-danger btn-delete btn-sm"><i class="far fa-trash-alt"></i></button></th>' +
+                "</tr>";
+            $("#tbl-body").append(row);
+        });
+        $('.selectpicker').val('');
+        $('.filter-option-inner-inner').text('');
+    })
+});
+$(function () {
+    $("#includedContent").load("country-select.html");
 });
 
 $(document).on("click", ".btn-delete", function () {
@@ -284,7 +307,7 @@ $(function () {
 
 function getCountryCode(obj, val) {
     return Object.keys(obj).find(
-        (key) => obj[key].toUpperCase() === val.toUpperCase()
+        (key) => obj[key].toUpperCase().trim() === val.toUpperCase().trim()
     );
 }
 
