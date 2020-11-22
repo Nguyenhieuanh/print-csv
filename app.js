@@ -1,6 +1,6 @@
-$(function () {
-    $("#includedContent").load("country-select.html");
-});
+// $(function () {
+//     $("#includedContent").load("country-select.html");
+// });
 
 $(document).ready(function () {
     $("#rate-rule").change(function (e) {
