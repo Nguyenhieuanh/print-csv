@@ -1,3 +1,7 @@
+$(function () {
+    $("#includedContent").load("country-select.html");
+});
+
 $(document).ready(function () {
     $("#rate-rule").change(function (e) {
         if ($("#rate-rule option:selected").val() == 1) {
@@ -41,9 +45,6 @@ $(document).ready(function () {
         $('.selectpicker').val('');
         $('.filter-option-inner-inner').text('');
     })
-});
-$(function () {
-    $("#includedContent").load("country-select.html");
 });
 
 $(document).on("click", ".btn-delete", function () {
