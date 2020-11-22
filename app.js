@@ -24,14 +24,16 @@ $(document).ready(function () {
 
     $('#add-country').on('click', function () {
         var countrySelect = $('.selectpicker').val();
+        var subtotalOrWeight = $('#above').val();
+        var shippingPrice = $('#price').val();
         countrySelect.forEach(element => {
             var row =
                 "<tr>" +
                 '<th><input type="text" class="custom-input country-input" value="' + element + '"autocomplete="off"></th>' +
                 '<th><input type="text" class="custom-input region-input" value="*"></th>' +
                 '<th><input type="text" class="custom-input zip-input" value="*"></th>' +
-                '<th><input type="text" class="custom-input above-input"></th>' +
-                '<th><input type="text" class="custom-input price-input"></th>' +
+                '<th><input type="text" class="custom-input above-input" value="' + subtotalOrWeight +'"></th>' +
+                '<th><input type="text" class="custom-input price-input" value="' + shippingPrice +'"></th>' +
                 '<th><button class="btn btn-danger btn-delete btn-sm"><i class="far fa-trash-alt"></i></button></th>' +
                 "</tr>";
             $("#tbl-body").append(row);
@@ -325,7 +327,7 @@ $(document).on("click", "#export-csv", function () {
         });
         return json;
     })();
-    var rule = $("#rate-rule option:selected").text();
+    var rule = $("#rate-rule option:selected").val();
     var countries = $(".country-input")
         .map((i, e) => e.value)
         .get();
@@ -342,7 +344,7 @@ $(document).on("click", "#export-csv", function () {
         .map((i, e) => e.value)
         .get();
     const rows = [
-        ["COUNTRY", "REGION / STATE", "ZIP / POSTAL CODE", rule, "SHIPPING PRICE"],
+        ["Country", "Region/State", "Zip/Postal Code", rule, "Shipping Price"],
     ];
     for (let i = 0; i < countries.length; i++) {
         var row = [
