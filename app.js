@@ -36,8 +36,8 @@ $(document).ready(function () {
                 '<th><input type="text" class="custom-input country-input" value="' + element + '"autocomplete="off"></th>' +
                 '<th><input type="text" class="custom-input region-input" value="*"></th>' +
                 '<th><input type="text" class="custom-input zip-input" value="*"></th>' +
-                '<th><input type="text" class="custom-input above-input" value="' + subtotalOrWeight +'"></th>' +
-                '<th><input type="text" class="custom-input price-input" value="' + shippingPrice +'"></th>' +
+                '<th><input type="text" class="custom-input above-input" value="' + subtotalOrWeight + '"></th>' +
+                '<th><input type="text" class="custom-input price-input" value="' + shippingPrice + '"></th>' +
                 '<th><button class="btn btn-danger btn-delete btn-sm"><i class="far fa-trash-alt"></i></button></th>' +
                 "</tr>";
             $("#tbl-body").append(row);
@@ -368,3 +368,21 @@ $(document).on("click", "#export-csv", function () {
 
     link.click();
 });
+
+$(document).on('click', '#import-csv', function (e) {
+    var form_data = new FormData(document.getElementById("form-csv"));
+    $.ajax({
+        type: "POST",
+        url: "/controller/functions.php",
+        data: form_data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        dataType: "json",
+        success: function (response) {
+            console.log('123');
+            console.log(response);
+        }, 
+        error: function(req, err){ console.log(err); }
+    });
+})
